@@ -48,7 +48,6 @@ namespace DBinz.Data.Access
             return connectionString;
         }
 
-        public DbSet<TableDetails> TableDetails { get; set; }
         public DbSet<object> InsertionData;
     }
 }

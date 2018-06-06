@@ -58,8 +58,12 @@ namespace DBinz.Business
 
       
 
-        public void FetchColumnData(int objectId)
+        public IEnumerable<Tuple<string>> FetchColumnData(int objectId)
         {
+            var columnDetails = Context.Database.SqlQuery<ColumnDetails>(@" ");
+
+            foreach (var columnDetailsItem in columnDetails)
+                yield return new Tuple<string>("something");
 
         }
 
