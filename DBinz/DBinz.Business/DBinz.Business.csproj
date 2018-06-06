@@ -56,5 +56,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBinz.Data.Access\DBinz.Data.Access.csproj">
+      <Project>{5c1ee567-9a42-4582-90bd-18606911c7ba}</Project>
+      <Name>DBinz.Data.Access</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBinz.Data.Models\DBinz.Data.Models.csproj">
+      <Project>{f31bbec4-9121-4b41-a23c-6114d87607fb}</Project>
+      <Name>DBinz.Data.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

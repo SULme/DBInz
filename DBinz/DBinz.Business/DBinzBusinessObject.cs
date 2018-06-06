@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBinz.Data.Access;
+using DBinz.Data.Models;
 
 namespace DBinz.Business
 {
@@ -34,26 +35,32 @@ namespace DBinz.Business
                 Context.Database.Connection.Open();
                 Context.Database.Connection.Close();
             }
-            catch (SqlException exc)
+            catch (SqlException)
             {
                 return false;
             }
             return true;
         }
 
-        public List<string> RetrieveTableNames()
+        public IEnumerable<Tuple<string, string, int>> FetchTableDetails()
         {
-            var tableNames = Context.Database.SqlQuery<string>(@"   select		CONCAT(A.name, '.', T.name)
-                                                                    from		sys.schemas		as A
-                                                                    join		sys.tables		as T
-	                                                                    on		A.schema_id = T.schema_id"
-                                                                ).ToList<string>();
-            return tableNames;
+            var tableDetails = Context.Database.SqlQuery<TableDetails>(@"   select	S.name			as SchemaName,
+                                                                                    T.name			as TableName,
+		                                                                            T.object_id		as ObjectID
+                                                                            from	sys.schemas		as S
+                                                                            join	sys.tables		as T
+	                                                                            on	S.schema_id = T.schema_id"
+                                                                                );
+
+            foreach(var tableDetailsItem in tableDetails)
+                yield return new Tuple<string, string, int>(tableDetailsItem.SchemaName, tableDetailsItem.TableName, tableDetailsItem.ObjectID);
         }
 
-        public void RetrieveColumns()
+      
+
+        public void FetchColumnData(int objectId)
         {
-            
+
         }
 
         public void Dispose()

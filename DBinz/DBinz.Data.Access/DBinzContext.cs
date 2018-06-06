@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBinz.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Dynamic;
@@ -47,6 +48,7 @@ namespace DBinz.Data.Access
             return connectionString;
         }
 
-        public DbSet<ExpandoObject> InsertionTable;
+        public DbSet<TableDetails> TableDetails { get; set; }
+        public DbSet<object> InsertionData;
     }
 }
